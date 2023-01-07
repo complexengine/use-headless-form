@@ -1,8 +1,9 @@
+import type React from "react";
 import { useState } from "react";
 
 export type FormField<V, TV> = {
   set: (value: V) => void;
-  errors: string[];
+  errors: React.ReactNode[];
   satisfied: boolean;
   sourceValue: V;
   value: TV;
@@ -21,7 +22,10 @@ type FormValidation<
 
 export type FormFieldValidation<V, TV, U = Record<string, unknown>> = {
   defaultValue: V;
-  validators?: ((value: V, transformedAndSourceValues: U) => unknown)[];
+  validators?: ((
+    value: V,
+    transformedAndSourceValues: U
+  ) => React.ReactNode | unknown)[];
   transformer?: (value: V) => TV;
 };
 
@@ -73,7 +77,7 @@ export function useHeadlessForm<
       const errors = validators
         ? (validators
             .map((fn) => fn(value, transformedAndSourceValues))
-            .filter((maybeError) => typeof maybeError === "string") as string[])
+            .filter((maybeError) => !!maybeError) as React.ReactNode[])
         : [];
 
       const satisfied = errors.length === 0;

@@ -4,7 +4,7 @@ A headless react hook for forms.
 
 ## Demo
 
-```ts
+```tsx
 const Form = () => {
   const validation = useHeadlessForm({
     username: {
@@ -19,7 +19,7 @@ const Form = () => {
     password: {
       defaultValue: "",
       validators: [
-        (value) => value.length === 0 && "Password cannot be empty.",
+        (value) => value.length === 0 && <span className="bg-red-500">Password cannot be empty."</span>,
         (value) =>
           value.length < 8 && "Password needs to be atleast 8 characters long.",
         (value) =>
@@ -75,7 +75,7 @@ const Form = () => {
         }
       />
       <button
-        className="bg-white disabled:bg-green-50"
+        className="bg-white disabled:bg-neutral-500"
         disabled={!validation.satisfied}
       >
         Submit
@@ -85,13 +85,10 @@ const Form = () => {
 };
 
 const FormErrors = ({ errors }: { errors: string[] }) => (
-  <div className="bg-white">
+  <div>
     {errors.map((error, idx) => (
-      <span key={idx}>{error}</span>
+      <div key={idx}>{error}</div>
     ))}
   </div>
 );
-
-export default Form;
-
 ```
