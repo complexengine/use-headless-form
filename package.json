@@ -1,0 +1,41 @@
+{
+  "name": "use-headless-form",
+  "version": "0.0.1",
+  "description": "A headless react hook for forms.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/complexengine/use-headless-form.git"
+  },
+  "keywords": [
+    "react",
+    "form",
+    "headless",
+    "react-hook"
+  ],
+  "author": "complexengine <complexenginedev@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/complexengine/use-headless-form/issues"
+  },
+  "homepage": "https://github.com/complexengine/use-headless-form#readme",
+  "devDependencies": {
+    "@types/react": "^18.0.26",
+    "@typescript-eslint/eslint-plugin": "^5.48.0",
+    "eslint": "^8.31.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "prettier": "^2.8.1",
+    "typescript": "^4.9.4"
+  },
+  "dependencies": {
+    "react": "^18.2.0"
+  }
+}
