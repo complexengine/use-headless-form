@@ -81,6 +81,25 @@ export type FormDescriptor<
 };
 
 /**
+ * Helper function to infer `FormDescriptor`
+ */
+export function createFormDescriptor<
+  A,
+  B extends {
+    [F in keyof A]: F extends keyof B ? B[F] : A[F];
+  }
+>(descriptor: FormDescriptor<A, B>) {
+  return descriptor;
+}
+
+/**
+ * Infer `FormValidation` from `FormDescriptor`
+ */
+export type inferFormValidation<T> = T extends FormDescriptor<infer A, infer B>
+  ? FormValidation<A, B>
+  : never;
+
+/**
  * Hook that provides form validation functionality
  * @param fields - An object that defines the fields of the form and their validation properties
  */
