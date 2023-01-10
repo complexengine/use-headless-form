@@ -1,5 +1,11 @@
 # use-headless-form
 
+## 0.1.3
+
+### Patch Changes
+
+- dbd2293: Fixed types and added helpers
+
 ## 0.1.2
 
 ### Patch Changes
