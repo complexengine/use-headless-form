@@ -2,10 +2,26 @@ import type React from "react";
 import { useState } from "react";
 
 export type FormField<V, TV> = {
+  /**
+   * Function to set the form field value
+   * @param value - The new value to set the form field to
+   */
   set: (value: V) => void;
+  /**
+   * Errors generated from validators
+   */
   errors: React.ReactNode[];
+  /**
+   * Indicates whether the form field has any errors
+   */
   satisfied: boolean;
+  /**
+   * The original value of the form field from the `set` method
+   */
   sourceValue: V;
+  /**
+   * The final value of the form field which has been transformed if the form field has a `transformer`
+   */
   value: TV;
 };
 
@@ -16,19 +32,38 @@ type FormValidation<
   fields: {
     [F in keyof A]: FormField<A[F], B[F]>;
   };
+  /**
+   * Indicates whether all of the form fields are satisfied
+   */
   satisfied: boolean;
+  /**
+   * Resets all form fields to their default value
+   */
   resetFields: () => void;
 };
 
 export type FormFieldValidation<V, TV, U = Record<string, unknown>> = {
+  /**
+   * The default value of the form field
+   */
   defaultValue: V;
+  /**
+   * An array of functions that performs validation on the form field and returns an error as a `ReactNode`
+   */
   validators?: ((
     value: V,
     transformedAndSourceValues: U
   ) => React.ReactNode | unknown)[];
+  /**
+   * Transforms the value of the form field
+   */
   transformer?: (value: V) => TV;
 };
 
+/**
+ * Hook that provides form validation functionality
+ * @param fields - An object that defines the fields of the form and their validation properties
+ */
 export function useHeadlessForm<
   A extends B,
   B extends { [F in keyof A]: F extends keyof B ? B[F] : A[F] }

@@ -1,6 +1,10 @@
 # use-headless-form
 
-A headless react hook for forms.
+A typesafe headless react hook for forms.
+
+## Installation
+
+    npm install use-headless-form
 
 ## Demo
 
