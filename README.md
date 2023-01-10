@@ -23,7 +23,7 @@ const Form = () => {
     password: {
       defaultValue: "",
       validators: [
-        (value) => value.length === 0 && <span className="bg-red-500">Password cannot be empty."</span>,
+        (value) => value.length === 0 && <span className="bg-red-500">Password cannot be empty.</span>,
         (value) =>
           value.length < 8 && "Password needs to be atleast 8 characters long.",
         (value) =>
@@ -88,7 +88,7 @@ const Form = () => {
   );
 };
 
-const FormErrors = ({ errors }: { errors: string[] }) => (
+const FormErrors = ({ errors }: { errors: React.ReactNode[] }) => (
   <div>
     {errors.map((error, idx) => (
       <div key={idx}>{error}</div>

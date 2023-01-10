@@ -25,7 +25,7 @@ export type FormField<V, TV> = {
   value: TV;
 };
 
-type FormValidation<
+export type FormValidation<
   A extends { [F in keyof A]: A[F] },
   B extends { [F in keyof A]: B[F] }
 > = {
