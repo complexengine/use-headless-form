@@ -55,7 +55,7 @@ export type FormFieldDescriptor<V, TV, U = Record<string, unknown>> = {
    * An array of functions that performs validation on the form field and returns an error as a `ReactNode`
    */
   validators?: ((
-    value: V,
+    value: TV,
     transformedAndSourceValues: U
   ) => React.ReactNode | unknown)[];
   /**
@@ -65,7 +65,7 @@ export type FormFieldDescriptor<V, TV, U = Record<string, unknown>> = {
 };
 
 export type FormDescriptor<
-  A extends B,
+  A extends { [F in keyof A]: A[F] },
   B extends { [F in keyof A]: F extends keyof B ? B[F] : A[F] }
 > = {
   [F in keyof A]: FormFieldDescriptor<
@@ -85,7 +85,7 @@ export type FormDescriptor<
  * @param fields - An object that defines the fields of the form and their validation properties
  */
 export function useHeadlessForm<
-  A extends B,
+  A extends { [F in keyof A]: A[F] },
   B extends { [F in keyof A]: F extends keyof B ? B[F] : A[F] }
 >(fields: FormDescriptor<A, B>): FormValidation<A, B> {
   const initialState: { [F in keyof A]: A[F] } = Object.entries(fields).reduce(
