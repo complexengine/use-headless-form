@@ -1,5 +1,11 @@
 # use-headless-form
 
+## 0.1.2
+
+### Patch Changes
+
+- 0ec28ee: Improve types
+
 ## 0.1.1
 
 ### Patch Changes
