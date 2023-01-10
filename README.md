@@ -7,7 +7,13 @@ A typesafe headless react hook for forms.
     npm install use-headless-form
 
 ## Demo
-For a more advanced demo, click [here](https://codesandbox.io/s/github/complexengine/use-headless-form/tree/main/examples/advanced)
+For a more advanced demo, click [here](https://codesandbox.io/s/github/complexengine/use-headless-form/tree/main/examples/advanced?file=/src/app.tsx) or,
+
+<a href="https://codesandbox.io/s/github/complexengine/use-headless-form/tree/main/examples/advanced?file=/src/app.tsx">
+  <img width="200" src="https://user-images.githubusercontent.com/51714798/211045303-2603f241-412b-4c4e-8a34-476ae7ba189b.png" />
+</a>
+
+## Usage
 
 ```tsx
 const Form = () => {
