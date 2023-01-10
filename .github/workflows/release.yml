@@ -1,0 +1,43 @@
+# Originally inspired by Cloudflare Wrangler
+# https://github.com/cloudflare/wrangler2/blob/main/.github/workflows/release.yml
+
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  prerelease:
+    if: |
+      github.repository_owner == 'complexengine'
+    name: Create a PR for release workflow
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Create Version PR or Publish to NPM
+        uses: changesets/action@v1.4.1
+        with:
+          commit: "chore(release): version packages"
+          title: "chore(release): version packages"
+          publish: npx changeset publish
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_ENV: "production"

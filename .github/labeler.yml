@@ -1,0 +1,8 @@
+"area: src":
+  - any: ["*"]
+
+"area: docs":
+  - any: ["**/*.md"]
+
+"area: ci":
+  - any: [".github/**/*"]

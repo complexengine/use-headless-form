@@ -1,0 +1,55 @@
+name: CI
+
+on:
+  pull_request:
+    branches: ["*"]
+
+jobs:
+  lint-pr-title:
+    runs-on: ubuntu-latest
+    name: Validate PR Title
+    steps:
+      - uses: amannn/action-semantic-pull-request@v5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  lint:
+    runs-on: ubuntu-latest
+    name: Lint
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          cache: "npm"
+          node-version: 18
+
+      - name: Install deps
+        run: npm ci
+      
+      - name: Lint
+        run: npm run lint
+
+  tsc:
+    runs-on: ubuntu-latest
+    name: TypeScript check
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install deps
+        run: npm ci
+
+      - name: TypeScript check
+        run: npm run typecheck
