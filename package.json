@@ -1,6 +1,6 @@
 {
   "name": "use-headless-form",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "A headless react hook for forms.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
