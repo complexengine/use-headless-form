@@ -1,5 +1,5 @@
 ---
-"use-headless-form": minor
+"use-headless-form": patch
 ---
 
 Fixed types and added helpers
