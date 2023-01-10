@@ -37,6 +37,10 @@ type FormValidation<
    */
   satisfied: boolean;
   /**
+   * Returns true if the provided form fields are satisfied
+   */
+  satisfies: (...fieldNames: [keyof A, ...(keyof A)[]]) => boolean;
+  /**
    * Resets all form fields to their default value
    */
   resetFields: () => void;
@@ -137,6 +141,13 @@ export function useHeadlessForm<
   return {
     fields: formFields,
     satisfied: allSatisfied,
+    satisfies: (...fieldNames: [keyof A, ...(keyof A)[]]) => {
+      let satisfied = true;
+      for (const fieldName of fieldNames) {
+        satisfied &&= formFields[fieldName].satisfied;
+      }
+      return satisfied;
+    },
     resetFields: () => setState(initialState),
   };
 }
