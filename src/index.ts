@@ -46,7 +46,7 @@ export type FormValidation<
   resetFields: () => void;
 };
 
-export type FormFieldValidation<V, TV, U = Record<string, unknown>> = {
+export type FormFieldDescriptor<V, TV, U = Record<string, unknown>> = {
   /**
    * The default value of the form field
    */
@@ -64,15 +64,11 @@ export type FormFieldValidation<V, TV, U = Record<string, unknown>> = {
   transformer?: (value: V) => TV;
 };
 
-/**
- * Hook that provides form validation functionality
- * @param fields - An object that defines the fields of the form and their validation properties
- */
-export function useHeadlessForm<
+export type FormDescriptor<
   A extends B,
   B extends { [F in keyof A]: F extends keyof B ? B[F] : A[F] }
->(fields: {
-  [F in keyof A]: FormFieldValidation<
+> = {
+  [F in keyof A]: FormFieldDescriptor<
     A[F],
     B[F],
     {
@@ -82,7 +78,16 @@ export function useHeadlessForm<
       };
     }
   >;
-}): FormValidation<A, B> {
+};
+
+/**
+ * Hook that provides form validation functionality
+ * @param fields - An object that defines the fields of the form and their validation properties
+ */
+export function useHeadlessForm<
+  A extends B,
+  B extends { [F in keyof A]: F extends keyof B ? B[F] : A[F] }
+>(fields: FormDescriptor<A, B>): FormValidation<A, B> {
   const initialState: { [F in keyof A]: A[F] } = Object.entries(fields).reduce(
     (acc, [fieldName, props]) => {
       const { defaultValue } = props as typeof fields[keyof A];
