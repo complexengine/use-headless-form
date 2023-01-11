@@ -1,5 +1,11 @@
 # use-headless-form
 
+## 0.1.4
+
+### Patch Changes
+
+- a9f5fda: Module is now generated as CommonJS
+
 ## 0.1.3
 
 ### Patch Changes
