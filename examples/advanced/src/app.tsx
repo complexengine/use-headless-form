@@ -2,6 +2,7 @@ import { useState } from "react";
 import type { inferFormValidation } from "use-headless-form";
 import { createFormDescriptor } from "use-headless-form";
 import { useHeadlessForm } from "use-headless-form";
+import { FormErrors } from "./form-errors";
 
 const formDescription = createFormDescriptor<
   {
@@ -139,9 +140,6 @@ function FormStep2({
       <div className="text-right">
         <button
           className="mr-2 hover:underline px-3 py-2 rounded-md transition-all disabled:bg-neutral-500"
-          disabled={
-            !validation.satisfies("username", "password", "passwordAgain")
-          }
           onClick={(e) => {
             e.preventDefault();
             onPrevStep();
@@ -151,9 +149,7 @@ function FormStep2({
         </button>
         <button
           className="bg-blue-700 px-3 py-2 rounded-md transition-all disabled:bg-neutral-500"
-          disabled={
-            !validation.satisfies("username", "password", "passwordAgain")
-          }
+          disabled={!validation.satisfied}
         >
           Submit
         </button>
@@ -212,14 +208,5 @@ const App = () => {
     </form>
   );
 };
-
-const FormErrors = ({ errors }: { errors: React.ReactNode[] }) => (
-  <div className="p-2 bg-neutral-900">
-    {errors.map((error, idx) => (
-      <div key={idx}>❗{error}</div>
-    ))}
-    {errors.length === 0 && "✅"}
-  </div>
-);
 
 export default App;
