@@ -1,7 +1,6 @@
 import { useState } from "react";
 import type { inferFormValidation } from "use-headless-form";
-import { createFormDescriptor } from "use-headless-form";
-import { useHeadlessForm } from "use-headless-form";
+import { createFormDescriptor, useHeadlessForm } from "use-headless-form";
 import { FormErrors } from "./form-errors";
 
 const formDescription = createFormDescriptor<
